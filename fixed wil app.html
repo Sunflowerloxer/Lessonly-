@@ -1,0 +1,3087 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fff6eb">
+<title>Lessonly — Creative Learning Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#1b1a38;
+  --muted:#67668a;
+  --line:#ebe5f8;
+  --bg:#fff8f0;
+  --white:#ffffff;
+  
+  /* Fun & Vibrant Palette */
+  --purple:#734bf9;
+  --purple-dark:#5832d6;
+  --pale:#f2ecff;
+  --pink:#ff5c93;
+  --pink-pale:#ffe8f0;
+  --mint:#12b886;
+  --mint-pale:#e3faf2;
+  --sun:#ffbe0b;
+  --sun-pale:#fff8db;
+  --sky:#38bdf8;
+  --sky-pale:#e0f2fe;
+  --coral:#ff6b6b;
+  
+  --shadow:0 12px 32px rgba(115, 75, 249, 0.08);
+  --shadow-hover:0 18px 40px rgba(115, 75, 249, 0.16);
+  --radius:20px;
+}
+
+*{ box-sizing:border-box }
+
+body{
+  margin:0;
+  background-color: var(--bg);
+  background-image: 
+    radial-gradient(circle at 12% 15%, rgba(255, 92, 147, 0.12) 0%, transparent 28%),
+    radial-gradient(circle at 88% 20%, rgba(56, 189, 248, 0.14) 0%, transparent 30%),
+    radial-gradient(circle at 50% 85%, rgba(255, 190, 11, 0.12) 0%, transparent 35%),
+    radial-gradient(#d8cef5 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
+  color: var(--ink);
+  font-family:'Plus Jakarta Sans', sans-serif;
+  font-size:14px;
+  overflow-x: hidden;
+}
+
+button, input, textarea, select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+h1, h2, h3, p{
+  margin-top:0;
+}
+
+h1, h2, h3, .brand, .title, .stat-value, .score{
+  font-family:'Fredoka', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* =========================
+   PLAYFUL KEYFRAME ANIMATIONS
+========================= */
+
+@keyframes popBounce {
+  0% { opacity: 0; transform: scale(0.92) translateY(16px); }
+  70% { opacity: 1; transform: scale(1.02) translateY(-3px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-7px) rotate(2deg); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-6deg) scale(1.08); }
+  75% { transform: rotate(6deg) scale(1.08); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(115, 75, 249, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(115, 75, 249, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(115, 75, 249, 0); }
+}
+
+@keyframes confettiDrop {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+}
+
+.page{
+  animation: popBounce .45s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.stats .stat:nth-child(1){ animation: popBounce .45s cubic-bezier(.34, 1.56, .64, 1) .05s both; }
+.stats .stat:nth-child(2){ animation: popBounce .45s cubic-bezier(.34, 1.56, .64, 1) .12s both; }
+.stats .stat:nth-child(3){ animation: popBounce .45s cubic-bezier(.34, 1.56, .64, 1) .19s both; }
+
+/* =========================
+   FUN TACTILE BUTTONS
+========================= */
+
+.btn{
+  border: 2px solid var(--line);
+  background: var(--white);
+  color: var(--ink);
+  padding: 10px 18px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 13px;
+  box-shadow: 0 4px 0 #e2daf5;
+  transition: all .2s cubic-bezier(.34, 1.56, .64, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover{
+  border-color: var(--purple);
+  color: var(--purple);
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 #d5c8fa;
+}
+
+.btn:active{
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #d5c8fa;
+}
+
+.btn.primary{
+  background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+  border: 2px solid transparent;
+  color: #fff;
+  box-shadow: 0 5px 0 #4d2cc4, 0 10px 20px rgba(255, 92, 147, 0.25);
+}
+
+.btn.primary:hover{
+  color: #fff;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 0 #4d2cc4, 0 14px 25px rgba(255, 92, 147, 0.35);
+}
+
+.btn.primary:active{
+  transform: translateY(2px) scale(0.99);
+  box-shadow: 0 2px 0 #4d2cc4;
+}
+
+.btn.small{
+  padding: 7px 12px;
+  font-size: 12px;
+  border-radius: 11px;
+}
+
+.btn.ghost{
+  background: rgba(255,255,255,0.6);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.btn.ghost:hover{
+  background: var(--pale);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+/* =========================
+   SHELL & SIDEBAR
+========================= */
+
+.shell{
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar{
+  width: 244px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border-right: 2px solid var(--line);
+  padding: 26px 16px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand{
+  font-size: 24px;
+  font-weight: 700;
+  padding: 2px 12px 28px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.brand b{
+  background: linear-gradient(135deg, var(--purple), var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-sparkle{
+  display: inline-block;
+  color: var(--sun);
+  animation: wiggle 2.5s ease-in-out infinite;
+  font-size: 20px;
+  margin-left: 4px;
+}
+
+.side-label{
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #9692b8;
+  font-weight: 800;
+  padding: 0 12px 10px;
+}
+
+.nav{
+  border: 2px solid transparent;
+  background: transparent;
+  text-align: left;
+  color: #5b597d;
+  padding: 12px 14px;
+  border-radius: 14px;
+  margin: 3px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  transition: all .22s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.nav:hover{
+  background: var(--pale);
+  color: var(--purple);
+  transform: translateX(5px);
+}
+
+.nav.active{
+  background: linear-gradient(135deg, var(--pale) 0%, var(--pink-pale) 100%);
+  color: var(--purple);
+  border-color: rgba(115, 75, 249, 0.25);
+  box-shadow: 0 4px 12px rgba(115, 75, 249, 0.1);
+}
+
+.nav span{
+  font-size: 18px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform .25s ease;
+}
+
+.nav:hover span{
+  transform: rotate(-10deg) scale(1.15);
+}
+
+.side-bottom{
+  margin-top: auto;
+  border-top: 2px dashed var(--line);
+  padding: 18px 8px 0;
+  display: flex;
+  gap: 11px;
+  align-items: center;
+}
+
+.avatar{
+  width: 38px;
+  height: 38px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, var(--sun), var(--pink));
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-family: 'Fredoka', sans-serif;
+  box-shadow: 0 4px 10px rgba(255, 92, 147, 0.25);
+  transition: transform .2s ease;
+}
+
+.avatar:hover{
+  transform: rotate(8deg) scale(1.08);
+}
+
+.user-name{
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.user-role{
+  font-size: 11px;
+  color: var(--purple);
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.main{
+  flex: 1;
+  min-width: 0;
+}
+
+.top{
+  height: 68px;
+  border-bottom: 2px solid var(--line);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+  position: sticky;
+  top: 0;
+  z-index: 15;
+}
+
+.crumb{
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.crumb strong{
+  color: var(--purple);
+  background: var(--pale);
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+
+.topright{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fake{
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #b86b00;
+  background: var(--sun-pale);
+  border: 1.5px solid #ffe066;
+  padding: 6px 12px;
+  border-radius: 99px;
+  animation: pulseRing 2.5s infinite;
+}
+
+/* =========================
+   PAGE & HERO BANNER
+========================= */
+
+.page{
+  max-width: 1140px;
+  margin: auto;
+  padding: 34px 36px 70px;
+}
+
+.heading{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+  background: linear-gradient(135deg, #ffffff 0%, #f6f1ff 60%, #fff0f6 100%);
+  border: 2px solid var(--line);
+  border-radius: 24px;
+  padding: 22px 26px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.heading-left{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.hero-gif{
+  width: 74px;
+  height: 74px;
+  border-radius: 18px;
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 8px 20px rgba(115, 75, 249, 0.18);
+  animation: floatSlow 4s ease-in-out infinite;
+  flex: none;
+  background: var(--pale);
+}
+
+.eyebrow{
+  font-size: 11px;
+  color: var(--pink);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  display: inline-block;
+  background: var(--pink-pale);
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+
+.heading h1{
+  font-size: 28px;
+  margin-bottom: 5px;
+  color: var(--ink);
+}
+
+.heading p{
+  color: var(--muted);
+  font-size: 13.5px;
+  margin: 0;
+}
+
+/* =========================
+   CARDS & STATS
+========================= */
+
+.stats{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stat,
+.panel,
+.activity-card,
+.builder-panel,
+.preview,
+.type-card,
+.progress-card{
+  background: var(--white);
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform .25s cubic-bezier(.34, 1.56, .64, 1), box-shadow .25s ease, border-color .25s ease;
+}
+
+.stat:hover,
+.activity-card:hover,
+.progress-card:hover{
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: var(--shadow-hover);
+  border-color: #d2c4fc;
+}
+
+.stat{
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.stat-icon{
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.stat:nth-child(1) .stat-icon{ background: var(--pale); color: var(--purple); }
+.stat:nth-child(2) .stat-icon{ background: var(--pink-pale); color: var(--pink); }
+.stat:nth-child(3) .stat-icon{ background: var(--mint-pale); color: var(--mint); }
+
+.stat:hover .stat-icon{
+  transform: rotate(-10deg) scale(1.12);
+}
+
+.stat-label{
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+
+.stat-value{
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* =========================
+   PANELS & LISTS
+========================= */
+
+.panel{
+  overflow: hidden;
+}
+
+.panel-head{
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--line);
+  background: #fcfaff;
+}
+
+.panel-head h2{
+  font-size: 17px;
+  margin: 0;
+}
+
+.activity-list{
+  padding: 4px 22px;
+}
+
+.activity-row{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1.5px dashed var(--line);
+  transition: transform .2s ease;
+}
+
+.activity-row:hover{
+  transform: translateX(4px);
+}
+
+.activity-row:last-child{
+  border-bottom: 0;
+}
+
+.type-icon{
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, var(--pale), var(--sky-pale));
+  color: var(--purple);
+  display: grid;
+  place-items: center;
+  font-size: 19px;
+  flex: none;
+  font-weight: 700;
+}
+
+.activity-meta{
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-name{
+  font-weight: 800;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.activity-sub{
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.row-actions{
+  display: flex;
+  gap: 8px;
+}
+
+.badge{
+  font-size: 11px;
+  padding: 5px 11px;
+  border-radius: 99px;
+  background: var(--mint-pale);
+  color: #0b8761;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.badge.pending{
+  background: var(--sun-pale);
+  color: #b86b00;
+}
+
+.badge.red{
+  background: #ffe8e8;
+  color: var(--coral);
+}
+
+.empty{
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+}
+
+.empty-gif{
+  width: 96px;
+  height: 96px;
+  border-radius: 20px;
+  object-fit: cover;
+  margin-bottom: 14px;
+  box-shadow: 0 10px 24px rgba(115, 75, 249, 0.14);
+  animation: floatSlow 3.5s ease-in-out infinite;
+}
+
+/* =========================
+   PROGRESS BARS
+========================= */
+
+.progress-card{
+  padding: 18px;
+  box-shadow: none;
+}
+
+.progress-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.progress-title{
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.progress-percent{
+  font-weight: 800;
+  color: var(--pink);
+  background: var(--pink-pale);
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-size: 12px;
+}
+
+.progress-track,
+.tracking-bar{
+  height: 11px;
+  background: #f0ebfa;
+  border-radius: 99px;
+  overflow: hidden;
+  padding: 2px;
+}
+
+.progress-fill,
+.tracking-fill{
+  height: 100%;
+  background: linear-gradient(90deg, var(--purple), var(--pink), var(--sun));
+  background-size: 200% 100%;
+  border-radius: 99px;
+  transition: width .7s cubic-bezier(.34, 1.56, .64, 1);
+  animation: gradientShift 4s ease infinite;
+}
+
+.progress-meta{
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.grid2{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* =========================
+   BUILDER
+========================= */
+
+.builder-panel{
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.builder-panel h2,
+.preview h2{
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+
+.hint{
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 17px;
+}
+
+.label{
+  display: block;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+  margin: 15px 0 6px;
+}
+
+.input,
+.textarea,
+.select,
+.correct-select{
+  display: block;
+  width: 100%;
+  border: 2px solid var(--line);
+  border-radius: 13px;
+  padding: 11px 13px;
+  background: #fff;
+  color: var(--ink);
+  outline: none;
+  font-size: 13px;
+  transition: all .2s ease;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus,
+.correct-select:focus{
+  border-color: var(--purple);
+  box-shadow: 0 0 0 4px rgba(115, 75, 249, 0.14);
+  transform: translateY(-1px);
+}
+
+.textarea{
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.55;
+}
+
+.types{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 11px;
+}
+
+.type-card{
+  box-shadow: 0 4px 0 var(--line);
+  padding: 15px 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.type-card:hover{
+  transform: translateY(-4px);
+  border-color: var(--purple);
+  box-shadow: 0 7px 0 #d5c8fa;
+}
+
+.type-card.selected{
+  border: 2px solid var(--purple);
+  background: linear-gradient(180deg, #ffffff 0%, var(--pale) 100%);
+  box-shadow: 0 5px 0 var(--purple);
+  transform: translateY(-2px);
+}
+
+.type-card .emoji{
+  font-size: 24px;
+  display: block;
+  margin-bottom: 8px;
+  transition: transform .25s ease;
+}
+
+.type-card:hover .emoji{
+  transform: scale(1.2) rotate(-8deg);
+}
+
+.type-card .type-name{
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.type-card .type-tag{
+  font-size: 9.5px;
+  font-weight: 800;
+  color: var(--pink);
+  background: var(--pink-pale);
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 99px;
+  margin-top: 6px;
+}
+
+.preview{
+  padding: 24px;
+  min-height: 300px;
+  position: sticky;
+  top: 86px;
+  background: linear-gradient(180deg, #ffffff 0%, #faf7ff 100%);
+}
+
+.preview-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.preview-empty{
+  height: 210px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  text-align: center;
+  font-size: 13px;
+}
+
+.preview-title{
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 5px;
+}
+
+.preview-desc{
+  color: var(--muted);
+  font-size: 12.5px;
+  margin-bottom: 18px;
+}
+
+.q-card{
+  border: 2px solid var(--line);
+  background: #fff;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 11px;
+}
+
+.q-title{
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.option{
+  padding: 9px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.option.correct{
+  border-color: var(--mint);
+  background: var(--mint-pale);
+  color: #097553;
+  font-weight: 800;
+}
+
+.builder-footer{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.tag{
+  font-size: 10px;
+  font-weight: 800;
+  background: var(--sky-pale);
+  border-radius: 99px;
+  padding: 5px 10px;
+  color: #0369a1;
+  letter-spacing: 0.5px;
+}
+
+.items{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item-editor{
+  border: 2px solid var(--line);
+  border-radius: 15px;
+  padding: 14px;
+  background: #fcfbff;
+}
+
+.item-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--purple);
+}
+
+.fields{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin-top: 8px;
+}
+
+/* =========================
+   LOGIN SCREEN
+========================= */
+
+.login-page{
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 25px;
+}
+
+.login-card{
+  width: min(500px, 100%);
+  padding: 36px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 2px solid var(--line);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(115, 75, 249, 0.14);
+  animation: popBounce .55s cubic-bezier(.34, 1.56, .64, 1);
+  position: relative;
+}
+
+.login-gif-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.login-gif{
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  object-fit: cover;
+  border: 3px solid var(--pale);
+  box-shadow: 0 8px 20px rgba(255, 92, 147, 0.2);
+  animation: floatSlow 3.5s ease-in-out infinite;
+}
+
+.login-card h1{
+  font-size: 27px;
+  margin-bottom: 8px;
+}
+
+.login-card p{
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.role-choice{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.role-btn{
+  border: 2px solid var(--line);
+  background: #fff;
+  border-radius: 18px;
+  padding: 16px;
+  text-align: left;
+  box-shadow: 0 4px 0 var(--line);
+  transition: all .22s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.role-btn:hover{
+  border-color: var(--purple);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 0 #d5c8fa;
+}
+
+.role-btn.selected{
+  border-color: var(--purple);
+  background: linear-gradient(180deg, #fff 0%, var(--pale) 100%);
+  box-shadow: 0 5px 0 var(--purple);
+}
+
+.role-icon{
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.role-title{
+  font-weight: 800;
+  font-size: 14px;
+  font-family: 'Fredoka', sans-serif;
+}
+
+.role-description{
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* =========================
+   STUDENT & PLAY CARDS
+========================= */
+
+.student-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.activity-card{
+  padding: 20px;
+  margin-bottom: 14px;
+}
+
+.activity-card h3{
+  font-size: 17px;
+  margin: 12px 0 6px;
+}
+
+.activity-card p{
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.activity-card-footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.score-pill{
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--purple);
+  background: var(--pale);
+  padding: 6px 11px;
+  border-radius: 99px;
+}
+
+.tracking-row{
+  padding: 16px 0;
+  border-bottom: 1.5px dashed var(--line);
+}
+
+.tracking-row:last-child{
+  border-bottom: 0;
+}
+
+.tracking-top{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.student-name{
+  font-weight: 800;
+  font-size: 13.5px;
+}
+
+.student-status{
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+/* =========================
+   SHARE / QUIZ PLAY MODE
+========================= */
+
+.share-wrap{
+  max-width: 680px;
+  margin: 38px auto;
+  padding: 0 18px;
+}
+
+.share-brand{
+  font-family: 'Fredoka', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.share-card{
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: 26px;
+  padding: 30px;
+  box-shadow: var(--shadow);
+  animation: popBounce .45s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.share-card h1{
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.share-card > p{
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+.play-q{
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Fredoka', sans-serif;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.play-option{
+  padding: 14px 16px;
+  border: 2px solid var(--line);
+  border-radius: 15px;
+  margin: 10px 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  background: #fff;
+  box-shadow: 0 4px 0 var(--line);
+  transition: all .2s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.play-option:hover{
+  border-color: var(--purple);
+  background: var(--pale);
+  transform: translateY(-2px) translateX(4px);
+  box-shadow: 0 6px 0 #d5c8fa;
+}
+
+.play-option.reveal-correct{
+  border-color: var(--mint);
+  background: var(--mint-pale);
+  color: #086648;
+  box-shadow: 0 4px 0 var(--mint);
+  animation: popBounce .35s ease;
+}
+
+.play-option.reveal-wrong{
+  border-color: var(--coral);
+  background: #fff0f0;
+  color: #b82e2e;
+  box-shadow: 0 4px 0 var(--coral);
+  animation: wiggle .35s ease;
+}
+
+.play-explanation{
+  background: var(--sun-pale);
+  border: 1.5px solid #ffe066;
+  border-radius: 14px;
+  padding: 13px 15px;
+  margin-top: 14px;
+  color: #6b4c00;
+  font-size: 13px;
+  font-weight: 600;
+  animation: popBounce .3s ease;
+}
+
+.score{
+  font-size: 46px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--purple), var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 12px 0;
+}
+
+.celebration-gif{
+  width: 140px;
+  height: 140px;
+  border-radius: 22px;
+  object-fit: cover;
+  margin: 10px 0 14px;
+  border: 4px solid var(--pale);
+  box-shadow: 0 12px 28px rgba(115, 75, 249, 0.2);
+  animation: popBounce .5s ease;
+}
+
+.mobile-note{
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 18px;
+  text-align: center;
+}
+
+/* =========================
+   INTERACTIVE MATCHING & ORDERING
+========================= */
+.match-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.match-btn{
+  padding: 14px;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  box-shadow: 0 4px 0 var(--line);
+  transition: all .2s ease;
+}
+
+.match-btn:hover{
+  border-color: var(--purple);
+  transform: translateY(-2px);
+}
+
+.match-btn.active{
+  border-color: var(--purple);
+  background: var(--pale);
+  color: var(--purple);
+  box-shadow: 0 4px 0 var(--purple);
+}
+
+.match-btn.done{
+  border-color: var(--mint);
+  background: var(--mint-pale);
+  color: #086648;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.order-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 15px;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  margin-bottom: 9px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.order-item.correct{
+  border-color: var(--mint);
+  background: var(--mint-pale);
+}
+
+.order-item.wrong{
+  border-color: var(--coral);
+  background: #fff0f0;
+}
+
+/* =========================
+   TOAST & STICKER
+========================= */
+
+.toast{
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--ink), #322f66);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 99px;
+  box-shadow: 0 12px 30px rgba(27, 26, 56, 0.28);
+  font-size: 13px;
+  font-weight: 700;
+  z-index: 9999;
+  animation: popBounce .35s cubic-bezier(.34, 1.56, .64, 1);
+  border: 2px solid rgba(255,255,255,0.15);
+}
+
+.learning-sticker{
+  position: fixed;
+  right: 22px;
+  bottom: 20px;
+  z-index: 999;
+  animation: popBounce .7s cubic-bezier(.34, 1.56, .64, 1) both, floatSlow 4s ease-in-out 1s infinite;
+}
+
+.learning-gif{
+  width: 116px;
+  height: 116px;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 14px 35px rgba(115, 75, 249, 0.25);
+  border: 3px solid #fff;
+  background: var(--pale);
+  cursor: pointer;
+  transition: transform .25s ease;
+}
+
+.learning-gif:hover{
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.learning-sticker-close{
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 26px;
+  height: 26px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--pink);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 20px;
+  padding: 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform .2s ease;
+}
+
+.learning-sticker-close:hover{
+  transform: scale(1.15) rotate(90deg);
+}
+
+.confetti-piece{
+  position: fixed;
+  top: -20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  z-index: 99999;
+  pointer-events: none;
+  animation: confettiDrop linear forwards;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:850px){
+  .sidebar{ width: 74px; padding: 20px 10px; }
+  .brand{ font-size: 0; padding: 4px 8px 27px; justify-content: center; }
+  .brand:first-letter{ font-size: 24px; }
+  .brand-sparkle{ font-size: 18px; }
+  .side-label, .nav .navtext, .user-info{ display: none; }
+  .nav{ justify-content: center; padding: 11px 0; }
+  .side-bottom{ justify-content: center; padding: 14px 0 0; }
+  .top{ padding: 0 20px; }
+  .page{ padding: 24px 18px; }
+  .preview{ position: static; }
+}
+
+@media(max-width:650px){
+  .heading{ flex-direction: column; align-items: flex-start; }
+  .heading-left{ flex-direction: column; align-items: flex-start; }
+  .stats, .grid2, .student-grid, .role-choice, .match-grid{ grid-template-columns: 1fr; }
+  .types{ grid-template-columns: repeat(2, 1fr); }
+  .learning-sticker{ right: 12px; bottom: 12px; }
+  .learning-gif{ width: 88px; height: 88px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="app"></div>
+<div id="toast-root"></div>
+
+<div class="learning-sticker" id="learningSticker" title="Click me for confetti!">
+  <button class="learning-sticker-close" type="button" onclick="document.getElementById('learningSticker').remove()" aria-label="Close">×</button>
+  <img class="learning-gif" onclick="burstConfetti()" src="data:image/gif;base64,R0lGODlhtAB4AIQAAPf4/GZW3hkkOsWLOcjL0kVOYC44TXN6idja4XyDkObo7YuRnoSKmKClsGhwf5KYpCMtQ1xkdbO3wdHU2zxFWFBZamNqekJLXa6yvJ2irb7Cy9/h51xMOp50OQAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQIDQAAACwAAAAAtAB4AAAI/wABCBxIsKDBgwgTKlzIsKHDhxAjSpxIsaLFixgzatzIsaPHjyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fPn0CDCi05oOjQoyqLDkDK1KTSplBFPo1KtePUqlgxXs3KleLWrmAdfg1LNuHYsmgJnk2bdi3bsm7fzly6k67cjXFh5r37UKnRm37t8rUY2GbhwRkPy1SMWKvfxY8b443skrHkxJRXWr6MWTDEAKBDh564lzPpiKJTqwYN0bNplatjq369U7bt2bRr3t6NOzdM3sBF+34ZvDjr4SuNK0eeUrlz5iadS4c+Urp16iCta8fuUft17htlE/98PlA8+IyxDRpXv/o8xvQDBQgQGFyg/PHt3VeED0D+/fr+zUdffvpJZF5//gEAYIIDEljgQwci2OBu9gk4YWoPohbhhRQWZFuGn31Y3nIjbghiQt6lKNyJC6noIostupgieIHV6BqHMpJokI2bwcXjWjl6h9CPpWFF5F/sBTndQUfeOJyS38GIEJRLSnkQleRZeSWW9Wk5JZfAefmliArq2KGYHp65Ho69oYkfmWXy9qaJbsYJp5wlwllnniY6yCaGeyZ5m4ZnBjrnoAx1aWiaxW3Z6KKCgnkcpJFySSmKkl6qEJiaxghlp4kqCWpDQY4K4YymAuCkozoutCqLRf7/yR9DsZ7XY6h+NnRrhrue1Kt7v/qaGa/DvhQsdMemlKxvyypbLI1IAhZtga8uluq1xk6LrUe1bitRt962pm24GoFLrq7j1llAgAwU1IB/BhAUIAHfpluQA/4dAOK6/kGgAEHvyhdvfP7RG1Fp+MqnL0P8BuiwwXI1LF+7AwUswMAVygdxX/YSlLAACy9UQAIIISDAxmxJLIC/FcMrb8H1VivQxyErNHLJJ/OlMsgtCzyZzADQ3NDNB5mMclo7C7CBQBZjjKDGBU2QQAEGXFzBA/8ONEAHHFBQtQERNHCQ0AyTXHTOdzV8QL5Mu0ww1AOt7bDCBFkwt3wVZB0322Xj/3w0Wg0vILcACADQ9MtwA2D33TwLFAHj8l1Q0OAUi2y2QUbr7N8CCkBA9+Fvoy1BgBRIoIACBDxAMQYBYg2ABhT49wBBD/iXwdCXF5R52psDwIB/E4CeMdqLX6x3QY/Ll/vokRPEunwS4O635vItAEDn8lkg/NNoV003Qt5Dft9ABAAv/dl/lxW4QL8r7PbwBnsu3+wIyS++0gMp4N/xCRGNOdoR6931wvc+7hksfDUrCAEhVziK+E93AHzL+gSygLk5bV6Ogxf/BpI8AVSOIw8kyO4CWL38LfCCMAMA8+RTutNNYAGrY9cEroeA1F3NY3yz3PR4V8KB1C5AKExc8WjmFrIOMu6DZNMh+qgnAOsRhIBBjODgHFazj90NiTm0We5EGMGUCXAgGQAi4ro4gQNQzWquIwgBDnCBr1GgAgzQwL2y2L8tDmSE54pICO/YxTw6ZI8CwaMf/2jHQPZxkCK7X/oQGZSAAAA7" alt="Animated learning celebration">
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  /* ==========================================================
+     EMBEDDED ANIMATED SVG DATA URIs (100% RELIABLE OFFLINE/SANDBOX)
+  ========================================================== */
+  const SVG_HERO = "data:image/svg+xml;utf8," + encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#734bf9"/>
+          <stop offset="100%" stop-color="#ff5c93"/>
+        </linearGradient>
+      </defs>
+      <rect width="120" height="120" rx="26" fill="url(#g1)"/>
+      <circle cx="60" cy="62" r="34" fill="#ffbe0b">
+        <animate attributeName="r" values="33;36;33" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="48" cy="56" r="4.5" fill="#1b1a38"/>
+      <circle cx="72" cy="56" r="4.5" fill="#1b1a38"/>
+      <path d="M46 70 Q60 83 74 70" stroke="#1b1a38" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <circle cx="38" cy="64" r="4" fill="#ff5c93" opacity="0.6"/>
+      <circle cx="82" cy="64" r="4" fill="#ff5c93" opacity="0.6"/>
+      <text x="16" y="30" font-size="16">✨<animateTransform attributeName="transform" type="translate" values="0,0; 0,-4; 0,0" dur="1.6s" repeatCount="indefinite"/></text>
+      <text x="88" y="32" font-size="16">🌟<animateTransform attributeName="transform" type="translate" values="0,0; 0,-5; 0,0" dur="1.9s" repeatCount="indefinite"/></text>
+    </svg>
+  `);
+
+  const SVG_ROCKET = "data:image/svg+xml;utf8," + encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+      <rect width="120" height="120" rx="26" fill="#1b1a38"/>
+      <circle cx="24" cy="28" r="2.5" fill="#ffbe0b"><animate attributeName="opacity" values="0.2;1;0.2" dur="1.4s" repeatCount="indefinite"/></circle>
+      <circle cx="94" cy="36" r="3" fill="#38bdf8"><animate attributeName="opacity" values="1;0.2;1" dur="1.8s" repeatCount="indefinite"/></circle>
+      <circle cx="86" cy="88" r="2" fill="#ff5c93"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" repeatCount="indefinite"/></circle>
+      <g>
+        <animateTransform attributeName="transform" type="translate" values="0,3; 0,-5; 0,3" dur="1.8s" repeatCount="indefinite"/>
+        <path d="M60 22 C74 38 78 58 76 76 L44 76 C42 58 46 38 60 22 Z" fill="#ffffff"/>
+        <path d="M60 22 C67 30 71 38 72 44 L48 44 C49 38 53 30 60 22 Z" fill="#ff5c93"/>
+        <path d="M44 62 L32 78 L45 76 Z" fill="#734bf9"/>
+        <path d="M76 62 L88 78 L75 76 Z" fill="#734bf9"/>
+        <circle cx="60" cy="56" r="8" fill="#38bdf8" stroke="#1b1a38" stroke-width="3"/>
+        <path d="M51 76 L60 98 L69 76 Z" fill="#ffbe0b">
+          <animate attributeName="d" values="M51 76 L60 96 L69 76 Z; M53 76 L60 104 L67 76 Z; M51 76 L60 96 L69 76 Z" dur="0.4s" repeatCount="indefinite"/>
+        </path>
+      </g>
+    </svg>
+  `);
+
+  const SVG_TROPHY = "data:image/svg+xml;utf8," + encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+      <rect width="120" height="120" rx="26" fill="#fff3c4"/>
+      <g>
+        <animateTransform attributeName="transform" type="rotate" values="-4 60 60; 4 60 60; -4 60 60" dur="2.2s" repeatCount="indefinite"/>
+        <path d="M36 34 H84 V52 C84 68 73 78 60 78 C47 78 36 68 36 52 Z" fill="#ffbe0b"/>
+        <path d="M36 40 H26 C26 54 32 60 38 60" fill="none" stroke="#f59f00" stroke-width="5" stroke-linecap="round"/>
+        <path d="M84 40 H94 C94 54 88 60 82 60" fill="none" stroke="#f59f00" stroke-width="5" stroke-linecap="round"/>
+        <rect x="54" y="76" width="12" height="14" fill="#f59f00"/>
+        <rect x="42" y="88" width="36" height="10" rx="5" fill="#734bf9"/>
+        <text x="51" y="61" font-size="18" fill="#fff">★</text>
+      </g>
+      <text x="20" y="30" font-size="15">🎉</text>
+      <text x="86" y="30" font-size="15">✨</text>
+    </svg>
+  `);
+
+  const SVG_STUDY = "data:image/svg+xml;utf8," + encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+      <rect width="120" height="120" rx="26" fill="#e0f2fe"/>
+      <g>
+        <animateTransform attributeName="transform" type="translate" values="0,0; 0,-4; 0,0" dur="2.4s" repeatCount="indefinite"/>
+        <rect x="28" y="34" width="64" height="52" rx="10" fill="#734bf9"/>
+        <rect x="34" y="38" width="25" height="44" rx="4" fill="#ffffff"/>
+        <rect x="61" y="38" width="25" height="44" rx="4" fill="#fff8db"/>
+        <line x1="39" y1="48" x2="54" y2="48" stroke="#734bf9" stroke-width="3" stroke-linecap="round"/>
+        <line x1="39" y1="56" x2="54" y2="56" stroke="#ff5c93" stroke-width="3" stroke-linecap="round"/>
+        <line x1="39" y1="64" x2="50" y2="64" stroke="#12b886" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="73" cy="56" r="7" fill="#ffbe0b"/>
+      </g>
+      <text x="82" y="32" font-size="16">💡<animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/></text>
+    </svg>
+  `);
+
+  const GIFS = {
+    hero: SVG_HERO,
+    trophy: SVG_TROPHY,
+    study: SVG_STUDY,
+    rocket: SVG_ROCKET
+  };
+
+  window.burstConfetti = function(){
+    const colors = ['#734bf9', '#ff5c93', '#ffbe0b', '#12b886', '#38bdf8'];
+    for(let i = 0; i < 42; i++){
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.width = (Math.random() * 8 + 6) + 'px';
+      el.style.height = (Math.random() * 8 + 6) + 'px';
+      el.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
+      el.style.animationDuration = (Math.random() * 1.5 + 1.4) + 's';
+      el.style.animationDelay = (Math.random() * 0.25) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 3200);
+    }
+  };
+
+  /* ==========================================================
+     STORAGE & SAFE UUID
+  ========================================================== */
+  const KEY = 'lessonly_activities_v2';
+  const USERS = 'lessonly_users_v2';
+  const PROGRESS = 'lessonly_progress_v2';
+  const SAVED = 'lessonly_saved_v2';
+  const DRAFT = 'lessonly_draft_v2';
+  const SESSION = 'lessonly_session_v2';
+
+  function makeId() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      return crypto.randomUUID();
+    }
+    return 'id-' + Date.now() + '-' + Math.random().toString(36).slice(2, 9);
+  }
+
+  const types = [
+    { id: 'multiple', name: 'Multiple choice', icon: '🎯', tag: 'CORE' },
+    { id: 'truefalse', name: 'True or false', icon: '⚡', tag: 'CORE' },
+    { id: 'flashcards', name: 'Flashcards', icon: '🃏', tag: 'CORE' },
+    { id: 'matching', name: 'Matching pairs', icon: '🧩', tag: 'CORE' },
+    { id: 'order', name: 'Put in order', icon: '🚀', tag: 'CORE' }
+  ];
+
+  const examples = {
+    multiple: {
+      title: 'A quick check on the water cycle',
+      description: 'Review the key stages of the water cycle.',
+      items: [
+        {
+          question: 'What process turns liquid water into water vapour?',
+          options: ['Condensation', 'Evaporation', 'Precipitation', 'Collection'],
+          answer: 1,
+          explanation: 'Heat changes liquid water into water vapour through evaporation.'
+        },
+        {
+          question: 'What forms when water vapour cools?',
+          options: ['Clouds', 'Rivers', 'Soil', 'Ocean waves'],
+          answer: 0,
+          explanation: 'Cooling vapour condenses into tiny droplets that form clouds.'
+        }
+      ]
+    },
+    truefalse: {
+      title: 'Water cycle: true or false?',
+      description: 'Check your understanding of how water moves.',
+      items: [
+        {
+          statement: 'The Sun provides energy for evaporation.',
+          answer: true,
+          explanation: 'Solar energy heats water and drives evaporation.'
+        },
+        {
+          statement: 'Condensation changes water vapour into liquid droplets.',
+          answer: true,
+          explanation: 'Cooling vapour condenses into liquid water.'
+        }
+      ]
+    },
+    flashcards: {
+      title: 'Water cycle flashcards',
+      description: 'Flip each card to test your memory.',
+      items: [
+        { front: 'Evaporation', back: 'Liquid water warms and changes into water vapour.' },
+        { front: 'Condensation', back: 'Water vapour cools and forms tiny liquid droplets.' }
+      ]
+    },
+    matching: {
+      title: 'Match the water cycle terms',
+      description: 'Connect each process to its meaning.',
+      items: [
+        { left: 'Evaporation', right: 'Liquid water becomes water vapour.' },
+        { left: 'Condensation', right: 'Water vapour becomes liquid droplets.' },
+        { left: 'Precipitation', right: 'Water falls from clouds as rain or snow.' }
+      ]
+    },
+    order: {
+      title: 'Put the water cycle in order',
+      description: 'Arrange these stages from start to finish.',
+      items: [
+        { text: 'Water gathers in oceans, lakes and rivers.' },
+        { text: 'The Sun heats water, which evaporates.' },
+        { text: 'Water vapour cools and condenses into clouds.' },
+        { text: 'Water falls back to Earth as precipitation.' }
+      ]
+    }
+  };
+
+  /* ==========================================================
+     STATE
+  ========================================================== */
+  let activities = load(KEY, []);
+  let users = load(USERS, []);
+  let progress = load(PROGRESS, {});
+  let saved = load(SAVED, {});
+  let teacher = 'Teacher';
+  let student = 'Student';
+  let session = load(SESSION, null);
+  let view = 'dashboard';
+  let selectedType = 'multiple';
+  let draft = load(DRAFT, JSON.parse(JSON.stringify(examples.multiple)));
+
+  // Seed one default sample activity if storage is empty so student mode has something ready to play
+  if (!activities.length) {
+    activities = [{
+      id: 'sample-water-cycle',
+      type: 'multiple',
+      title: examples.multiple.title,
+      description: examples.multiple.description,
+      items: JSON.parse(JSON.stringify(examples.multiple.items)),
+      teacherCreated: true,
+      createdBy: 'Ms Patel',
+      updated: new Date().toISOString()
+    }];
+    saveStore(KEY, activities);
+  }
+
+  let shareState = {
+    activity: null,
+    isStudent: false,
+    index: 0,
+    score: 0,
+    selected: null,
+    done: false,
+    flipped: false,
+    matchLeft: null,
+    matchRightList: [],
+    matchedIndices: [],
+    orderList: [],
+    orderChecked: false
+  };
+
+  /* ==========================================================
+     HELPERS
+  ========================================================== */
+  function load(key, fallback) {
+    try {
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+
+  function saveStore(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch {}
+  }
+
+  function esc(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[c]));
+  }
+
+  function toast(message) {
+    const r = document.getElementById('toast-root');
+    if (!r) return;
+    r.innerHTML = `<div class="toast">✨ ${esc(message)}</div>`;
+    setTimeout(() => { r.innerHTML = ''; }, 2600);
+  }
+
+  function button(text, fn, cls = 'btn') {
+    return `<button type="button" class="${cls}" data-act="${esc(fn)}">${text}</button>`;
+  }
+
+  function currentUser() {
+    return session?.role === 'teacher' ? teacher : student;
+  }
+
+  function activityIcon(id) {
+    return types.find(t => t.id === id)?.icon || '✨';
+  }
+
+  function persistAll() {
+    saveStore(KEY, activities);
+    saveStore(PROGRESS, progress);
+    saveStore(SAVED, saved);
+    saveStore(USERS, users);
+  }
+
+  function progressKey(userId, activityId) {
+    return `${userId}_${activityId}`;
+  }
+
+  function getProgress(userId, activityId) {
+    return progress[progressKey(userId, activityId)] || {
+      started: false,
+      completed: false,
+      score: 0,
+      total: 0,
+      percent: 0
+    };
+  }
+
+  /* ==========================================================
+     LAYOUT
+  ========================================================== */
+  function layout(body) {
+    const role = session?.role || 'teacher';
+
+    document.getElementById('app').innerHTML = `
+      <div class="shell">
+        <aside class="sidebar">
+          <div class="brand">
+            lesson<b>ly</b> <span class="brand-sparkle">✦</span>
+          </div>
+
+          <div class="side-label">
+            ${role === 'teacher' ? 'Teacher Studio' : 'Student Zone'}
+          </div>
+
+          ${role === 'teacher' ? `
+            <button type="button" class="nav ${view === 'dashboard' ? 'active' : ''}" data-act="dashboard">
+              <span>🏠</span><i class="navtext" style="font-style:normal">Dashboard</i>
+            </button>
+            <button type="button" class="nav ${view === 'activities' ? 'active' : ''}" data-act="activities">
+              <span>📚</span><i class="navtext" style="font-style:normal">My activities</i>
+            </button>
+            <button type="button" class="nav ${view === 'builder' ? 'active' : ''}" data-act="builder">
+              <span>🎨</span><i class="navtext" style="font-style:normal">Create activity</i>
+            </button>
+            <button type="button" class="nav ${view === 'tracking' ? 'active' : ''}" data-act="tracking">
+              <span>🚀</span><i class="navtext" style="font-style:normal">Student progress</i>
+            </button>
+          ` : `
+            <button type="button" class="nav ${view === 'student-dashboard' ? 'active' : ''}" data-act="student-dashboard">
+              <span>🏠</span><i class="navtext" style="font-style:normal">My dashboard</i>
+            </button>
+            <button type="button" class="nav ${view === 'assigned' ? 'active' : ''}" data-act="assigned">
+              <span>🎯</span><i class="navtext" style="font-style:normal">Assigned activities</i>
+            </button>
+            <button type="button" class="nav ${view === 'saved' ? 'active' : ''}" data-act="saved">
+              <span>⭐</span><i class="navtext" style="font-style:normal">Saved activities</i>
+            </button>
+            <button type="button" class="nav ${view === 'student-builder' ? 'active' : ''}" data-act="student-builder">
+              <span>🎨</span><i class="navtext" style="font-style:normal">Create activity</i>
+            </button>
+          `}
+
+          <div class="side-bottom">
+            <div class="avatar">${esc((currentUser()[0] || 'U').toUpperCase())}</div>
+            <div class="user-info">
+              <div class="user-name">${esc(currentUser())}</div>
+              <div class="user-role">${role === 'teacher' ? '✨ Super Teacher' : '🌟 Star Learner'}</div>
+            </div>
+          </div>
+        </aside>
+
+        <main class="main">
+          <div class="top">
+            <div class="crumb">
+              Workspace &nbsp;/&nbsp; <strong>${pageName()}</strong>
+            </div>
+            <div class="topright">
+              <span class="fake">✨ Creative Studio</span>
+              <div class="avatar" style="width:32px;height:32px;font-size:12px">
+                ${esc((currentUser()[0] || 'U').toUpperCase())}
+              </div>
+              ${button('Sign out', 'logout', 'btn small ghost')}
+            </div>
+          </div>
+
+          <section class="page">${body}</section>
+        </main>
+      </div>
+    `;
+  }
+
+  function pageName() {
+    const names = {
+      'dashboard': 'Overview',
+      'activities': 'My activities',
+      'builder': 'Activity studio',
+      'tracking': 'Student progress',
+      'student-dashboard': 'My dashboard',
+      'assigned': 'Assigned activities',
+      'saved': 'Saved activities',
+      'student-builder': 'Activity studio'
+    };
+    return names[view] || 'Workspace';
+  }
+
+  /* ==========================================================
+     LOGIN
+  ========================================================== */
+  function showLogin() {
+    document.getElementById('app').innerHTML = `
+      <div class="login-page">
+        <div class="login-card">
+          <div class="login-gif-header">
+            <div class="brand" style="padding:0">
+              lesson<b>ly</b> <span class="brand-sparkle">✦</span>
+            </div>
+            <img class="login-gif" src="${GIFS.rocket}" alt="Rocket launch">
+          </div>
+
+          <div class="eyebrow">Creative Learning Studio</div>
+          <h1>Welcome to your learning playground</h1>
+          <p>
+            Choose how you want to jump in! Teachers can craft colorful activities and track learners,
+            while students can play, collect stars, and watch their progress soar.
+          </p>
+
+          <div class="role-choice">
+            <button type="button" class="role-btn ${session?.role === 'teacher' ? 'selected' : ''}" data-act="role:teacher">
+              <div class="role-icon">👩‍🏫</div>
+              <div class="role-title">Teacher</div>
+              <div class="role-description">Create activities and track students.</div>
+            </button>
+
+            <button type="button" class="role-btn ${session?.role === 'student' ? 'selected' : ''}" data-act="role:student">
+              <div class="role-icon">🎒</div>
+              <div class="role-title">Student</div>
+              <div class="role-description">Learn, save activities and level up.</div>
+            </button>
+          </div>
+
+          <label class="label" for="loginname">Your name</label>
+          <input
+            class="input"
+            id="loginname"
+            placeholder="${session?.role === 'student' ? 'e.g. Sarah' : 'e.g. Ms Patel'}"
+            value="${esc(session?.role === 'teacher' ? teacher : session?.role === 'student' ? student : '')}"
+          >
+
+          <div style="margin-top:18px">
+            ${button(session?.role ? `Let's go, ${esc(session.role)}! 🚀` : 'Choose a role first', 'login', 'btn primary')}
+          </div>
+
+          <p style="margin-top:18px;font-size:11px">
+            Demo mode: accounts and progress are saved right in your browser.
+          </p>
+        </div>
+      </div>
+    `;
+  }
+
+  /* ==========================================================
+     TEACHER DASHBOARD
+  ========================================================== */
+  function dashboard() {
+    view = 'dashboard';
+    const recent = activities.slice(0, 4);
+
+    layout(`
+      <div class="heading">
+        <div class="heading-left">
+          <img class="hero-gif" src="${GIFS.hero}" alt="Welcome celebration">
+          <div>
+            <div class="eyebrow">Teacher workspace</div>
+            <h1>Good day, ${esc(teacher)}! 👋</h1>
+            <p>Craft playful learning activities and cheer on your students' progress.</p>
+          </div>
+        </div>
+        ${button('🎨 &nbsp;Create activity', 'builder', 'btn primary')}
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-icon">📚</div>
+          <div>
+            <div class="stat-label">Activities created</div>
+            <div class="stat-value">${activities.length}</div>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">🎉</div>
+          <div>
+            <div class="stat-label">Student submissions</div>
+            <div class="stat-value">${Object.values(progress).filter(x => x.completed).length}</div>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">🚀</div>
+          <div>
+            <div class="stat-label">Completion rate</div>
+            <div class="stat-value">${teacherCompletionRate()}%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Recently created</h2>
+            ${button('View all', 'activities', 'btn small ghost')}
+          </div>
+          ${recent.length ? `<div class="activity-list">${recent.map(row).join('')}</div>` : `
+            <div class="empty">
+              <img class="empty-gif" src="${GIFS.study}" alt="Study time">
+              <div style="font-weight:800;color:var(--ink);font-size:15px">Your activity library is ready!</div>
+              <p style="font-size:12px;margin:7px 0 16px">Create your very first interactive student activity.</p>
+              ${button('🎨 Create activity', 'builder', 'btn primary small')}
+            </div>
+          `}
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Student progress</h2>
+            ${button('View tracking', 'tracking', 'btn small ghost')}
+          </div>
+          <div style="padding:20px">
+            ${Object.keys(progress).length ? teacherProgressPreview() : `
+              <div class="empty" style="padding:24px 10px">
+                <img class="empty-gif" src="${GIFS.rocket}" alt="Rocket">
+                <div style="font-weight:800;color:var(--ink);font-size:15px">Waiting for liftoff!</div>
+                <p style="font-size:12px;margin-top:6px">Share an activity link with students to see live progress here.</p>
+              </div>
+            `}
+          </div>
+        </div>
+      </div>
+    `);
+  }
+
+  function row(a) {
+    return `
+      <div class="activity-row">
+        <div class="type-icon">${activityIcon(a.type)}</div>
+        <div class="activity-meta">
+          <div class="activity-name">${esc(a.title)}</div>
+          <div class="activity-sub">
+            ${types.find(t => t.id === a.type)?.name || 'Activity'} · ${a.items.length} items · ${new Date(a.updated).toLocaleDateString()}
+          </div>
+        </div>
+        <span class="badge">Published</span>
+        <div class="row-actions">
+          ${button('▶️ Play', 'preview-play:' + a.id, 'btn small')}
+          ${button('🔗 Share', 'share:' + a.id, 'btn small')}
+          ${button('✏️ Edit', 'edit:' + a.id, 'btn small')}
+        </div>
+      </div>
+    `;
+  }
+
+  function activitiesPage() {
+    view = 'activities';
+    layout(`
+      <div class="heading">
+        <div class="heading-left">
+          <img class="hero-gif" src="${GIFS.study}" alt="Library">
+          <div>
+            <div class="eyebrow">Your library</div>
+            <h1>My activities</h1>
+            <p>Everything you've crafted for your students in one place.</p>
+          </div>
+        </div>
+        ${button('🎨 &nbsp;New activity', 'builder', 'btn primary')}
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>${activities.length} saved ${activities.length === 1 ? 'activity' : 'activities'}</h2>
+          <span class="tag">TEACHER CONTENT</span>
+        </div>
+        ${activities.length ? `<div class="activity-list">${activities.map(row).join('')}</div>` : `
+          <div class="empty">
+            <img class="empty-gif" src="${GIFS.study}" alt="Create">
+            <p>No activities yet — let's make something fun!</p>
+            ${button('🎨 Create activity', 'builder', 'btn primary small')}
+          </div>
+        `}
+      </div>
+    `);
+  }
+
+  function trackingPage() {
+    view = 'tracking';
+    const all = Object.entries(progress);
+
+    layout(`
+      <div class="heading">
+        <div class="heading-left">
+          <img class="hero-gif" src="${GIFS.trophy}" alt="Trophy">
+          <div>
+            <div class="eyebrow">Student analytics</div>
+            <h1>Student progress</h1>
+            <p>Celebrate milestones and track performance across activities.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-icon">👥</div>
+          <div>
+            <div class="stat-label">Learner activity</div>
+            <div class="stat-value">${all.length}</div>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon">🏆</div>
+          <div>
+            <div class="stat-label">Completed</div>
+            <div class="stat-value">${all.filter(([, v]) => v.completed).length}</div>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon">⚡</div>
+          <div>
+            <div class="stat-label">Average progress</div>
+            <div class="stat-value">${averageProgress()}%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Activity progress</h2>
+          <span class="tag">LIVE PROTOTYPE DATA</span>
+        </div>
+        <div style="padding:0 22px">
+          ${all.length ? all.map(([, p]) => {
+            const activity = activities.find(a => a.id === p.activityId);
+            return `
+              <div class="tracking-row">
+                <div class="tracking-top">
+                  <div>
+                    <div class="student-name">🌟 ${esc(p.studentName || 'Student')}</div>
+                    <div class="student-status">${esc(activity?.title || 'Activity')}</div>
+                  </div>
+                  <span class="badge ${p.completed ? '' : 'pending'}">
+                    ${p.completed ? '🎉 Completed' : '⏳ In progress'}
+                  </span>
+                </div>
+                <div class="tracking-bar">
+                  <div class="tracking-fill" style="width:${p.percent || 0}%"></div>
+                </div>
+                <div class="progress-meta">
+                  <span>Score: ${p.score || 0} / ${p.total || 0}</span>
+                  <span>${p.percent || 0}%</span>
+                </div>
+              </div>
+            `;
+          }).join('') : `<div class="empty">No student submissions yet.</div>`}
+        </div>
+      </div>
+    `);
+  }
+
+  function teacherProgressPreview() {
+    return Object.entries(progress).slice(0, 4).map(([, p]) => `
+      <div style="margin-bottom:16px">
+        <div class="tracking-top">
+          <div>
+            <div class="student-name">🌟 ${esc(p.studentName || 'Student')}</div>
+            <div class="student-status">${esc(activities.find(a => a.id === p.activityId)?.title || 'Activity')}</div>
+          </div>
+          <span class="progress-percent">${p.percent || 0}%</span>
+        </div>
+        <div class="tracking-bar">
+          <div class="tracking-fill" style="width:${p.percent || 0}%"></div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function teacherCompletionRate() {
+    const vals = Object.values(progress);
+    if (!vals.length) return 0;
+    return Math.round(vals.filter(x => x.completed).length / vals.length * 100);
+  }
+
+  function averageProgress() {
+    const vals = Object.values(progress);
+    if (!vals.length) return 0;
+    return Math.round(vals.reduce((sum, x) => sum + (x.percent || 0), 0) / vals.length);
+  }
+
+  /* ==========================================================
+     BUILDER
+  ========================================================== */
+  function builder(isStudent = false) {
+    view = isStudent ? 'student-builder' : 'builder';
+    if (!types.some(t => t.id === selectedType)) selectedType = 'multiple';
+
+    layout(`
+      <div class="heading">
+        <div class="heading-left">
+          <img class="hero-gif" src="${GIFS.rocket}" alt="Studio">
+          <div>
+            <div class="eyebrow">${isStudent ? 'Personal activity studio' : 'Activity studio'}</div>
+            <h1>Create an activity</h1>
+            <p>${isStudent ? 'Design your own practice game and save it to your workspace.' : 'Build an interactive learning activity and share it with students.'}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="builder-panel">
+        <h2>1. Choose an activity format</h2>
+        <p class="hint">Pick the interactive experience learners will play.</p>
+
+        <div class="types">
+          ${types.map(t => `
+            <div class="type-card ${t.id === selectedType ? 'selected' : ''}" data-type="${t.id}">
+              <span class="emoji">${t.icon}</span>
+              <div class="type-name">${t.name}</div>
+              <div class="type-tag">${t.tag}</div>
+            </div>
+          `).join('')}
+        </div>
+
+        <label class="label" for="title">Activity title</label>
+        <input class="input" id="title" value="${esc(draft.title)}" placeholder="e.g. A quick check on ecosystems">
+
+        <label class="label" for="description">Learning goal or instructions</label>
+        <input class="input" id="description" value="${esc(draft.description)}" placeholder="What should learners discover or practice?">
+      </div>
+
+      <div class="grid2">
+        <div class="builder-panel" style="margin:0">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <h2>2. Add your content</h2>
+              <p class="hint" style="margin:4px 0 0">Customize questions or auto-generate from notes.</p>
+            </div>
+            ${button('✨ Magic Generate', 'generate', 'btn primary small')}
+          </div>
+
+          <label class="label" for="prompt">Topic or study notes</label>
+          <textarea class="textarea" id="prompt" placeholder="Paste lesson notes, key terms, or a fun topic..."></textarea>
+
+          <div id="items" class="items" style="margin-top:16px">${itemsEditor()}</div>
+
+          <div class="builder-footer">
+            ${button('➕ Add item', 'add-item', 'btn small')}
+            ${button('🔍 Check activity', 'retry', 'btn small ghost')}
+          </div>
+
+          <div class="builder-footer">
+            ${button('💾 Save activity', 'save', 'btn primary')}
+            ${button('↺ Reset example', 'reset', 'btn ghost small')}
+          </div>
+        </div>
+
+        <div class="preview">
+          <div class="preview-top">
+            <h2>Live student preview</h2>
+            <span class="tag">MOBILE READY</span>
+          </div>
+          <div id="preview">${previewMarkup()}</div>
+        </div>
+      </div>
+    `);
+  }
+
+  function itemsEditor() {
+    const items = draft.items || [];
+    return items.map((item, i) => `
+      <div class="item-editor" data-item="${i}">
+        <div class="item-top">
+          <span>Item #${i + 1}</span>
+          <span>
+            ${button('↑', 'up:' + i, 'btn small ghost')}
+            ${button('↓', 'down:' + i, 'btn small ghost')}
+            ${button('🗑', 'delete:' + i, 'btn small ghost')}
+          </span>
+        </div>
+
+        ${selectedType === 'multiple' ? `
+          <input class="input edit-field" data-key="question" value="${esc(item.question)}" placeholder="Question">
+          <div class="fields">
+            ${(item.options || []).map((o, j) => `
+              <input class="input edit-option" data-index="${j}" value="${esc(o)}" placeholder="Option ${j + 1}">
+            `).join('')}
+          </div>
+          <label class="label">Correct answer</label>
+          <select class="correct-select edit-answer">
+            ${(item.options || []).map((o, j) => `
+              <option value="${j}" ${item.answer === j ? 'selected' : ''}>${String.fromCharCode(65 + j)} · ${esc(o)}</option>
+            `).join('')}
+          </select>
+          <input class="input edit-field" style="margin-top:8px" data-key="explanation" value="${esc(item.explanation)}" placeholder="Short explanation">
+        ` : selectedType === 'truefalse' ? `
+          <input class="input edit-field" data-key="statement" value="${esc(item.statement)}" placeholder="Statement">
+          <select class="correct-select edit-field" style="margin-top:8px" data-key="answer">
+            <option value="true" ${item.answer ? 'selected' : ''}>True</option>
+            <option value="false" ${!item.answer ? 'selected' : ''}>False</option>
+          </select>
+          <input class="input edit-field" style="margin-top:8px" data-key="explanation" value="${esc(item.explanation)}" placeholder="Short explanation">
+        ` : selectedType === 'flashcards' ? `
+          <input class="input edit-field" data-key="front" value="${esc(item.front)}" placeholder="Front of card">
+          <textarea class="textarea edit-field" style="margin-top:8px" data-key="back" placeholder="Back of card">${esc(item.back)}</textarea>
+        ` : selectedType === 'matching' ? `
+          <div class="fields">
+            <input class="input edit-field" data-key="left" value="${esc(item.left)}" placeholder="Term">
+            <input class="input edit-field" data-key="right" value="${esc(item.right)}" placeholder="Matching meaning">
+          </div>
+        ` : `
+          <input class="input edit-field" data-key="text" value="${esc(item.text)}" placeholder="Item in correct order">
+        `}
+      </div>
+    `).join('');
+  }
+
+  function previewMarkup() {
+    if (!draft.items?.length) {
+      return `<div class="preview-empty">Your interactive preview will appear here! ✨</div>`;
+    }
+
+    const top = `
+      <h3 class="preview-title">${esc(draft.title)}</h3>
+      <p class="preview-desc">${esc(draft.description)}</p>
+    `;
+
+    if (selectedType === 'multiple') {
+      return top + draft.items.map((it, i) => `
+        <div class="q-card">
+          <div class="q-title">${i + 1}. ${esc(it.question)}</div>
+          ${(it.options || []).map((o, j) => `
+            <div class="option ${it.answer === j ? 'correct' : ''}">
+              ${String.fromCharCode(65 + j)} &nbsp; ${esc(o)} ${it.answer === j ? '✓' : ''}
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+    }
+
+    if (selectedType === 'truefalse') {
+      return top + draft.items.map((it, i) => `
+        <div class="q-card">
+          <div class="q-title">${i + 1}. ${esc(it.statement)}</div>
+          <div class="option ${it.answer ? 'correct' : ''}">True ${it.answer ? '✓' : ''}</div>
+          <div class="option ${!it.answer ? 'correct' : ''}">False ${!it.answer ? '✓' : ''}</div>
+        </div>
+      `).join('');
+    }
+
+    if (selectedType === 'flashcards') {
+      return top + draft.items.map((it, i) => `
+        <div class="q-card">
+          <div class="tag">CARD ${i + 1}</div>
+          <div class="q-title" style="margin-top:8px">${esc(it.front)}</div>
+          <div class="option">↻ ${esc(it.back)}</div>
+        </div>
+      `).join('');
+    }
+
+    if (selectedType === 'matching') {
+      return top + draft.items.map(it => `
+        <div class="q-card">
+          <div class="option">${esc(it.left)} &nbsp; ↔ &nbsp; ${esc(it.right)}</div>
+        </div>
+      `).join('');
+    }
+
+    return top + `<div class="hint">Items are shuffled for students.</div>` + draft.items.map((it, i) => `
+      <div class="option">${i + 1}. ${esc(it.text)}</div>
+    `).join('');
+  }
+
+  /* ==========================================================
+     DRAFT LOGIC
+  ========================================================== */
+  function persistDraft() { saveStore(DRAFT, draft); }
+
+  function refreshBuilder() {
+    const el = document.getElementById('items');
+    if (el) el.innerHTML = itemsEditor();
+    const p = document.getElementById('preview');
+    if (p) p.innerHTML = previewMarkup();
+  }
+
+  function readDraft() {
+    const title = document.getElementById('title');
+    if (title) draft.title = title.value;
+    const description = document.getElementById('description');
+    if (description) draft.description = description.value;
+
+    draft.items.forEach((item, i) => {
+      const wrap = document.querySelector(`[data-item="${i}"]`);
+      if (!wrap) return;
+
+      wrap.querySelectorAll('.edit-field').forEach(el => {
+        const key = el.dataset.key;
+        if (key === 'answer' && selectedType === 'truefalse') {
+          item[key] = el.value === 'true';
+        } else if (key) {
+          item[key] = el.value;
+        }
+      });
+
+      wrap.querySelectorAll('.edit-option').forEach(el => {
+        if (Array.isArray(item.options)) {
+          item.options[+el.dataset.index] = el.value;
+        }
+      });
+
+      const answer = wrap.querySelector('.edit-answer');
+      if (answer) item.answer = +answer.value;
+    });
+
+    persistDraft();
+  }
+
+  function changeType(id) {
+    selectedType = id;
+    draft = JSON.parse(JSON.stringify(examples[id] || { title: '', description: '', items: [] }));
+    persistDraft();
+    builder(session?.role === 'student');
+  }
+
+  function addItem() {
+    readDraft();
+    if (selectedType === 'multiple') {
+      draft.items.push({ question: 'New question', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 0, explanation: '' });
+    } else if (selectedType === 'truefalse') {
+      draft.items.push({ statement: 'New statement', answer: true, explanation: '' });
+    } else if (selectedType === 'flashcards') {
+      draft.items.push({ front: 'New term', back: 'Add an explanation' });
+    } else if (selectedType === 'matching') {
+      draft.items.push({ left: 'New term', right: 'Its match' });
+    } else {
+      draft.items.push({ text: 'New item' });
+    }
+    persistDraft();
+    refreshBuilder();
+  }
+
+  function retry() {
+    readDraft();
+    let errors = [];
+    if (!draft.title.trim()) errors.push('Add an activity title first!');
+    if (!draft.items.length) errors.push('Add at least one item!');
+    if (selectedType === 'multiple') {
+      draft.items.forEach((x, i) => {
+        if (!Array.isArray(x.options) || x.options.length !== 4 || x.options.some(y => !y.trim())) {
+          errors.push(`Question ${i + 1} needs four filled options.`);
+        }
+      });
+    }
+    if (errors.length) { toast(errors[0]); return false; }
+    toast('Looks awesome — activity is ready!');
+    return true;
+  }
+
+  function generate() {
+    const prompt = document.getElementById('prompt')?.value.trim();
+    if (prompt) {
+      const topic = prompt.replace(/\s+/g, ' ').slice(0, 80);
+      draft = JSON.parse(JSON.stringify(examples[selectedType]));
+      draft.title = `${topic}${topic.endsWith('?') ? '' : ' — practice'}`;
+      draft.description = 'Generated from your notes in creative studio.';
+      draft.items = draft.items.map((x, i) => {
+        if (selectedType === 'multiple') {
+          x.question = `Which statement best relates to ${topic}?`;
+          x.options = [`A key idea about ${topic}`, `An unrelated example`, `The opposite of the concept`, `None of these`];
+          x.answer = 0;
+          x.explanation = `Review your notes: ${topic}`;
+        } else if (selectedType === 'truefalse') {
+          x.statement = `${topic} is an important concept to review.`;
+          x.answer = true;
+          x.explanation = `Review this statement against your notes on ${topic}.`;
+        } else if (selectedType === 'flashcards') {
+          x.front = `Key idea ${i + 1}`;
+          x.back = topic;
+        } else if (selectedType === 'matching') {
+          x.left = `Key term ${i + 1}`;
+          x.right = topic;
+        } else {
+          x.text = `Step ${i + 1}: ${topic}`;
+        }
+        return x;
+      });
+    } else {
+      draft = JSON.parse(JSON.stringify(examples[selectedType]));
+    }
+    persistDraft();
+    builder(session?.role === 'student');
+    retry();
+  }
+
+  function save() {
+    readDraft();
+    if (!retry()) return;
+
+    const id = draft.id || makeId();
+    const a = {
+      id,
+      type: selectedType,
+      title: draft.title.trim(),
+      description: draft.description.trim(),
+      items: draft.items,
+      teacherCreated: true,
+      createdBy: currentUser(),
+      updated: new Date().toISOString()
+    };
+
+    const index = activities.findIndex(x => x.id === id);
+    if (index >= 0) activities[index] = a;
+    else activities.unshift(a);
+
+    persistAll();
+    burstConfetti();
+    toast(session?.role === 'teacher' ? 'Activity saved for your students!' : 'Personal activity saved!');
+
+    if (session?.role === 'student') studentDashboard();
+    else dashboard();
+  }
+
+  /* ==========================================================
+     STUDENT DASHBOARD & PAGES
+  ========================================================== */
+  function studentDashboard() {
+    view = 'student-dashboard';
+    const studentActivities = activities.filter(a => a.teacherCreated);
+    const completed = studentActivities.filter(a => getProgress(student, a.id).completed).length;
+    const avg = studentActivities.length
+      ? Math.round(studentActivities.reduce((sum, a) => sum + getProgress(student, a.id).percent, 0) / studentActivities.length)
+      : 0;
+
+    layout(`
+      <div class="heading">
+        <div class="heading-left">
+          <img class="hero-gif" src="${GIFS.hero}" alt="Student welcome">
+          <div>
+            <div class="eyebrow">Student zone</div>
+            <h1>Welcome back, ${esc(student)}! 🌟</h1>
+            <p>Play activities, earn high scores, and watch your progress bar glow!</p>
+          </div>
+        </div>
+        ${button('🎨 &nbsp;Create activity', 'student-builder', 'btn primary')}
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-icon">🏆</div>
+          <div>
+            <div class="stat-label">Activities completed</div>
+            <div class="stat-value">${completed}</div>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">⚡</div>
+          <div>
+            <div class="stat-label">Overall progress</div>
+            <div class="stat-value">${avg}%</div>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">⭐</div>
+          <div>
+            <div class="stat-label">Saved activities</div>
+            <div class="stat-value">${(saved[student] || []).length}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Your progress</h2>
+            ${button('View activities', 'assigned', 'btn small ghost')}
+          </div>
+          <div style="padding:20px">
+            ${studentActivities.length ? studentActivities.slice(0, 4).map(a => {
+              const p = getProgress(student, a.id);
+              return `
+                <div class="progress-card" style="margin-bottom:12px">
+                  <div class="progress-header">
+                    <div class="progress-title">${esc(a.title)}</div>
+                    <div class="progress-percent">${p.percent}%</div>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width:${p.percent}%"></div>
+                  </div>
+                  <div class="progress-meta">
+                    <span>${p.completed ? '🎉 Completed' : '🚀 In progress'}</span>
+                    <span>${p.score || 0}/${p.total || a.items.length}</span>
+                  </div>
+                </div>
+              `;
+            }).join('') : `<div class="empty">No activities assigned yet.</div>`}
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Recent learning</h2>
+            ${button('Saved', 'saved', 'btn small ghost')}
+          </div>
+          <div style="padding:20px">
+            ${studentActivities.length ? studentActivities.slice(0, 3).map(a => studentActivityCard(a)).join('') : `
+              <div class="empty">Your teacher's activities will pop up here!</div>
+            `}
+          </div>
+        </div>
+      </div>
+    `);
+  }
+
+  function assignedPage() {
+    view = 'assigned';
+    const list = activities.filter(a => a.teacherCreated);
+    layout(`
+      <div class="heading">
+        <div class="heading-left">
+          <img class="hero-gif" src="${GIFS.study}" alt="Assigned">
+          <div>
+            <div class="eyebrow">Your learning</div>
+            <h1>Assigned activities</h1>
+            <p>Interactive challenges shared with you by your teacher.</p>
+          </div>
+        </div>
+      </div>
+      ${list.length ? `<div class="student-grid">${list.map(a => studentActivityCard(a)).join('')}</div>` : `
+        <div class="panel"><div class="empty">No activities have been assigned yet.</div></div>
+      `}
+    `);
+  }
+
+  function savedPage() {
+    view = 'saved';
+    const ids = saved[student] || [];
+    const list = ids.map(id => activities.find(a => a.id === id)).filter(Boolean);
+    layout(`
+      <div class="heading">
+        <div class="heading-left">
+          <img class="hero-gif" src="${GIFS.trophy}" alt="Saved">
+          <div>
+            <div class="eyebrow">Your library</div>
+            <h1>Saved activities</h1>
+            <p>Your favorite activities saved for quick practice.</p>
+          </div>
+        </div>
+        ${button('🎨 Create activity', 'student-builder', 'btn primary')}
+      </div>
+      ${list.length ? `<div class="student-grid">${list.map(a => studentActivityCard(a)).join('')}</div>` : `
+        <div class="panel">
+          <div class="empty">
+            <img class="empty-gif" src="${GIFS.study}" alt="Empty">
+            <div style="font-weight:800;color:var(--ink)">Nothing saved yet</div>
+            <p style="font-size:12px">Click Save on any activity card to bookmark it here.</p>
+          </div>
+        </div>
+      `}
+    `);
+  }
+
+  function studentActivityCard(a) {
+    const p = getProgress(student, a.id);
+    const isSaved = (saved[student] || []).includes(a.id);
+
+    return `
+      <div class="activity-card">
+        <div class="type-icon">${activityIcon(a.type)}</div>
+        <h3>${esc(a.title)}</h3>
+        <p>${esc(a.description)}</p>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:${p.percent}%"></div>
+        </div>
+        <div class="activity-card-footer">
+          <span class="score-pill">${p.percent}% complete</span>
+          <div style="display:flex;gap:8px">
+            ${button(isSaved ? '⭐ Saved' : '☆ Save', 'toggle-save:' + a.id, 'btn small')}
+            ${button(p.completed ? '🔄 Review' : '▶️ Start', 'student-play:' + a.id, 'btn primary small')}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  /* ==========================================================
+     EDIT, SHARE, SAVE, PLAY (SUPPORTS ALL 5 ACTIVITY TYPES!)
+  ========================================================== */
+  function startEdit(id) {
+    const a = activities.find(x => x.id === id);
+    if (!a) return;
+    selectedType = a.type;
+    draft = JSON.parse(JSON.stringify(a));
+    saveStore(DRAFT, draft);
+    builder(false);
+  }
+
+  function share(id) {
+    const a = activities.find(x => x.id === id);
+    if (!a) return;
+    const payload = btoa(unescape(encodeURIComponent(JSON.stringify(a))));
+    const url = location.href.split('#')[0] + '#a/' + payload;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(() => toast('Student activity link copied! 🔗')).catch(() => prompt('Copy this link:', url));
+    } else {
+      prompt('Copy this link:', url);
+    }
+  }
+
+  function toggleSave(id) {
+    if (!saved[student]) saved[student] = [];
+    if (saved[student].includes(id)) {
+      saved[student] = saved[student].filter(x => x !== id);
+      toast('Removed from saved activities.');
+    } else {
+      saved[student].push(id);
+      toast('Activity bookmarked! ⭐');
+    }
+    saveStore(SAVED, saved);
+    if (view === 'saved') savedPage();
+    else studentDashboard();
+  }
+
+  function shuffleArray(arr) {
+    const copy = arr.slice();
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  function playActivity(a, isStudent = true) {
+    const indexedRight = (a.items || []).map((it, idx) => ({ idx, text: it.right }));
+    const indexedOrder = (a.items || []).map((it, idx) => ({ idx, text: it.text }));
+
+    shareState = {
+      activity: a,
+      isStudent,
+      index: 0,
+      score: 0,
+      selected: null,
+      done: false,
+      flipped: false,
+      matchLeft: null,
+      matchRightList: shuffleArray(indexedRight),
+      matchedIndices: [],
+      orderList: shuffleArray(indexedOrder),
+      orderChecked: false
+    };
+
+    if (isStudent) {
+      progress[progressKey(student, a.id)] = {
+        studentName: student,
+        studentId: student,
+        activityId: a.id,
+        started: true,
+        completed: false,
+        score: 0,
+        total: a.items.length,
+        percent: 0
+      };
+      saveStore(PROGRESS, progress);
+    }
+
+    renderPlay();
+  }
+
+  function updateStudentProgress() {
+    if (!shareState.isStudent) return;
+    const a = shareState.activity;
+    const total = Math.max(1, a.items.length);
+    const percent = Math.round((shareState.score / total) * 100);
+    progress[progressKey(student, a.id)] = {
+      studentName: student,
+      studentId: student,
+      activityId: a.id,
+      started: true,
+      completed: shareState.done,
+      score: shareState.score,
+      total: a.items.length,
+      percent
+    };
+    saveStore(PROGRESS, progress);
+  }
+
+  function renderPlay() {
+    const s = shareState;
+    const a = s.activity;
+    document.getElementById('toast-root').innerHTML = '';
+
+    let html = `
+      <div class="share-wrap">
+        <div class="share-brand">
+          lesson<b>ly</b> <span class="brand-sparkle">✦</span>
+          <span class="tag">${s.isStudent ? 'STUDENT ACTIVITY' : 'PREVIEW MODE'}</span>
+        </div>
+
+        <div class="share-card">
+          <h1>${esc(a.title)}</h1>
+          <p>${esc(a.description)}</p>
+    `;
+
+    if (s.done) {
+      if (s.score === a.items.length) setTimeout(burstConfetti, 100);
+      html += `
+        <div style="text-align:center">
+          <div class="tag">COMPLETED!</div>
+          <br>
+          <img class="celebration-gif" src="${s.score === a.items.length ? GIFS.trophy : GIFS.hero}" alt="Celebration">
+          <div class="score">${s.score} <span style="font-size:20px;-webkit-text-fill-color:var(--muted)">/ ${a.items.length}</span></div>
+          <p style="font-weight:700;color:var(--ink)">
+            ${s.score === a.items.length ? 'Perfection! You nailed every single one! 🎉🏆' : 'Awesome effort! Want to give it another go? 💪'}
+          </p>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px">
+            ${button('🔄 Play again', (s.isStudent ? 'student-play:' : 'preview-play:') + a.id, 'btn primary')}
+            ${session ? button('🏠 Back to dashboard', s.isStudent ? 'student-dashboard' : 'dashboard', 'btn') : ''}
+          </div>
+        </div>
+      `;
+    } else if (a.type === 'matching') {
+      const doneCount = s.matchedIndices.length;
+      html += `
+        <div class="tag">MATCHED ${doneCount} OF ${a.items.length}</div>
+        <div class="progress-track" style="margin:12px 0 20px">
+          <div class="progress-fill" style="width:${(doneCount / a.items.length) * 100}%"></div>
+        </div>
+        <div class="play-q">Tap a term on the left, then its matching meaning on the right!</div>
+        <div class="match-grid">
+          <div>
+            ${a.items.map((it, idx) => {
+              const isDone = s.matchedIndices.includes(idx);
+              const isActive = s.matchLeft === idx;
+              return `<div class="match-btn ${isDone ? 'done' : ''} ${isActive ? 'active' : ''}" data-act="match-left:${idx}">${esc(it.left)}</div>`;
+            }).join('')}
+          </div>
+          <div>
+            ${s.matchRightList.map(item => {
+              const isDone = s.matchedIndices.includes(item.idx);
+              return `<div class="match-btn ${isDone ? 'done' : ''}" data-act="match-right:${item.idx}">${esc(item.text)}</div>`;
+            }).join('')}
+          </div>
+        </div>
+        ${session ? `<div style="margin-top:16px">${button('← Exit', s.isStudent ? 'student-dashboard' : 'dashboard', 'btn small ghost')}</div>` : ''}
+      `;
+    } else if (a.type === 'order') {
+      html += `
+        <div class="tag">SEQUENCE CHALLENGE</div>
+        <div class="play-q" style="margin-top:12px">Use the arrows to put these steps in the right order:</div>
+        <div>
+          ${s.orderList.map((item, pos) => {
+            let cls = 'order-item';
+            if (s.orderChecked) cls += (item.idx === pos ? ' correct' : ' wrong');
+            return `
+              <div class="${cls}">
+                <span><strong>${pos + 1}.</strong> ${esc(item.text)}</span>
+                ${!s.orderChecked ? `
+                  <span style="display:flex;gap:4px">
+                    ${button('↑', 'ord-up:' + pos, 'btn small ghost')}
+                    ${button('↓', 'ord-down:' + pos, 'btn small ghost')}
+                  </span>
+                ` : `<span>${item.idx === pos ? '✅' : '❌'}</span>`}
+              </div>
+            `;
+          }).join('')}
+        </div>
+        <div style="margin-top:16px;display:flex;gap:10px">
+          ${!s.orderChecked
+            ? button('✨ Check my order', 'check-order', 'btn primary')
+            : button('🏆 See my score', 'finish-order', 'btn primary')}
+        </div>
+      `;
+    } else {
+      const i = s.index;
+      const it = a.items[i];
+
+      html += `
+        <div class="tag">ITEM ${i + 1} OF ${a.items.length}</div>
+        <div class="progress-track" style="margin:12px 0 22px">
+          <div class="progress-fill" style="width:${(i / a.items.length) * 100}%"></div>
+        </div>
+      `;
+
+      if (a.type === 'multiple' || a.type === 'truefalse') {
+        html += `<div class="play-q">${esc(a.type === 'multiple' ? it.question : it.statement)}</div>`;
+        const opts = a.type === 'multiple' ? it.options : ['True', 'False'];
+
+        opts.forEach((o, j) => {
+          let c = 'play-option';
+          if (s.selected !== null) {
+            const correct = a.type === 'multiple' ? j === it.answer : (j === 0) === it.answer;
+            if (correct) c += ' reveal-correct';
+            else if (j === s.selected) c += ' reveal-wrong';
+          }
+          html += `<div class="${c}" data-act="choose:${j}">${esc(o)}</div>`;
+        });
+
+        if (s.selected !== null) {
+          const correct = s.selected === (a.type === 'multiple' ? it.answer : (it.answer ? 0 : 1));
+          html += `
+            <div class="play-explanation">
+              ${correct ? '🎉 Spot on! ' : '💡 Good try! '} ${esc(it.explanation || '')}
+            </div>
+            <div style="margin-top:16px">
+              ${button(i === a.items.length - 1 ? '🏆 See my score' : 'Next question ➡️', 'next', 'btn primary')}
+            </div>
+          `;
+        }
+      } else if (a.type === 'flashcards') {
+        html += `
+          <div class="play-q" style="padding:28px;background:var(--pale);border-radius:18px;text-align:center">
+            ${esc(it.front)}
+          </div>
+          ${s.flipped ? `<div class="play-explanation">✨ ${esc(it.back)}</div>` : ''}
+          <div style="margin-top:16px">
+            ${button(s.flipped ? (i === a.items.length - 1 ? '🏆 Finish deck' : 'Next card ➡️') : '🔄 Flip card', s.flipped ? 'next-card' : 'flip', 'btn primary')}
+          </div>
+        `;
+      }
+    }
+
+    html += `
+        </div>
+        <div class="mobile-note">Made with Lessonly · Creative Learning Studio ✨</div>
+      </div>
+    `;
+
+    document.getElementById('app').innerHTML = html;
+  }
+
+  /* ==========================================================
+     ROUTER & EVENTS
+  ========================================================== */
+  function route() {
+    const hash = location.hash;
+    if (hash.startsWith('#a/')) {
+      let a;
+      try { a = JSON.parse(decodeURIComponent(escape(atob(hash.slice(3))))); } catch {}
+      if (!a) {
+        document.getElementById('app').innerHTML = `
+          <div class="share-wrap"><div class="share-card"><h1>Invalid activity link</h1><p>Ask your teacher for a fresh link.</p></div></div>
+        `;
+        return;
+      }
+      playActivity(a, session?.role === 'student');
+      return;
+    }
+
+    if (!session) { showLogin(); return; }
+
+    if (session.role === 'teacher') {
+      teacher = session.name || 'Teacher';
+      if (view === 'builder') builder(false);
+      else if (view === 'activities') activitiesPage();
+      else if (view === 'tracking') trackingPage();
+      else dashboard();
+    } else {
+      student = session.name || 'Student';
+      if (view === 'assigned') assignedPage();
+      else if (view === 'saved') savedPage();
+      else if (view === 'student-builder') builder(true);
+      else studentDashboard();
+    }
+  }
+
+  document.addEventListener('input', e => {
+    if (e.target.matches('#title,#description,.edit-field,.edit-option,.edit-answer')) {
+      readDraft();
+      const p = document.getElementById('preview');
+      if (p) p.innerHTML = previewMarkup();
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && e.target.id === 'loginname') {
+      const loginBtn = document.querySelector('[data-act="login"]');
+      if (loginBtn) loginBtn.click();
+    }
+  });
+
+  document.addEventListener('click', e => {
+    const typeCard = e.target.closest('[data-type]');
+    if (typeCard) { changeType(typeCard.dataset.type); return; }
+
+    const el = e.target.closest('[data-act]');
+    if (!el) return;
+    const act = el.dataset.act;
+
+    if (act.startsWith('role:')) {
+      const role = act.split(':')[1];
+      session = { role, name: role === 'teacher' ? teacher : student };
+      showLogin();
+      return;
+    }
+
+    if (act === 'login') {
+      const input = document.getElementById('loginname');
+      const name = input ? input.value.trim() : '';
+      if (!name) { toast('Enter your name to continue!'); return; }
+      if (!session?.role) { toast('Choose Teacher or Student first!'); return; }
+      session.name = name;
+      if (session.role === 'teacher') teacher = name;
+      else student = name;
+      saveStore(SESSION, session);
+      burstConfetti();
+      route();
+      return;
+    }
+
+    if (act === 'logout') {
+      session = null;
+      localStorage.removeItem(SESSION);
+      location.hash = '';
+      showLogin();
+      return;
+    }
+
+    if (act === 'dashboard') { dashboard(); return; }
+    if (act === 'activities') { activitiesPage(); return; }
+    if (act === 'builder') {
+      selectedType = 'multiple';
+      draft = load(DRAFT, JSON.parse(JSON.stringify(examples.multiple)));
+      builder(false);
+      return;
+    }
+    if (act === 'tracking') { trackingPage(); return; }
+    if (act === 'student-dashboard') { studentDashboard(); return; }
+    if (act === 'assigned') { assignedPage(); return; }
+    if (act === 'saved') { savedPage(); return; }
+    if (act === 'student-builder') {
+      selectedType = 'multiple';
+      draft = JSON.parse(JSON.stringify(examples.multiple));
+      saveStore(DRAFT, draft);
+      builder(true);
+      return;
+    }
+
+    if (act === 'generate') { generate(); return; }
+    if (act === 'retry') { readDraft(); retry(); return; }
+    if (act === 'save') { save(); return; }
+    if (act === 'add-item') { addItem(); return; }
+    if (act === 'reset') {
+      draft = JSON.parse(JSON.stringify(examples[selectedType]));
+      persistDraft();
+      builder(session?.role === 'student');
+      return;
+    }
+
+    if (act.startsWith('share:')) { share(act.slice(6)); return; }
+    if (act.startsWith('edit:')) { startEdit(act.slice(5)); return; }
+    if (act.startsWith('delete:')) {
+      readDraft();
+      draft.items.splice(+act.slice(7), 1);
+      persistDraft();
+      refreshBuilder();
+      return;
+    }
+
+    if (act.startsWith('up:') || act.startsWith('down:')) {
+      readDraft();
+      const parts = act.split(':');
+      const i = +parts[1];
+      const j = parts[0] === 'up' ? i - 1 : i + 1;
+      if (j >= 0 && j < draft.items.length) {
+        [draft.items[i], draft.items[j]] = [draft.items[j], draft.items[i]];
+      }
+      persistDraft();
+      refreshBuilder();
+      return;
+    }
+
+    if (act.startsWith('toggle-save:')) { toggleSave(act.slice(12)); return; }
+    if (act.startsWith('student-play:')) {
+      const a = activities.find(x => x.id === act.slice(13));
+      if (a) playActivity(a, true);
+      return;
+    }
+    if (act.startsWith('preview-play:')) {
+      const a = activities.find(x => x.id === act.slice(13));
+      if (a) playActivity(a, false);
+      return;
+    }
+
+    if (act.startsWith('choose:')) {
+      const s = shareState;
+      if (s.selected !== null) return;
+      const i = +act.slice(7);
+      const it = s.activity.items[s.index];
+      const correct = s.activity.type === 'multiple' ? i === it.answer : (i === 0) === it.answer;
+      s.selected = i;
+      if (correct) {
+        s.score++;
+        burstConfetti();
+      }
+      updateStudentProgress();
+      renderPlay();
+      return;
+    }
+
+    if (act === 'flip') {
+      shareState.flipped = true;
+      renderPlay();
+      return;
+    }
+
+    if (act === 'next-card') {
+      const s = shareState;
+      s.score++;
+      s.index++;
+      s.flipped = false;
+      if (s.index >= s.activity.items.length) s.done = true;
+      updateStudentProgress();
+      renderPlay();
+      return;
+    }
+
+    if (act === 'next') {
+      const s = shareState;
+      s.index++;
+      s.selected = null;
+      s.flipped = false;
+      if (s.index >= s.activity.items.length) s.done = true;
+      updateStudentProgress();
+      renderPlay();
+      return;
+    }
+
+    /* MATCHING INTERACTIONS */
+    if (act.startsWith('match-left:')) {
+      shareState.matchLeft = +act.slice(11);
+      renderPlay();
+      return;
+    }
+
+    if (act.startsWith('match-right:')) {
+      const s = shareState;
+      if (s.matchLeft === null) {
+        toast('Pick a term on the left first!');
+        return;
+      }
+      const rightIdx = +act.slice(12);
+      if (rightIdx === s.matchLeft) {
+        s.matchedIndices.push(rightIdx);
+        s.score++;
+        s.matchLeft = null;
+        burstConfetti();
+        if (s.matchedIndices.length >= s.activity.items.length) {
+          s.done = true;
+        }
+        updateStudentProgress();
+        renderPlay();
+      } else {
+        toast('Not a match — try again!');
+        s.matchLeft = null;
+        renderPlay();
+      }
+      return;
+    }
+
+    /* ORDERING INTERACTIONS */
+    if (act.startsWith('ord-up:') || act.startsWith('ord-down:')) {
+      const s = shareState;
+      const parts = act.split(':');
+      const idx = +parts[1];
+      const target = parts[0] === 'ord-up' ? idx - 1 : idx + 1;
+      if (target >= 0 && target < s.orderList.length) {
+        [s.orderList[idx], s.orderList[target]] = [s.orderList[target], s.orderList[idx]];
+        renderPlay();
+      }
+      return;
+    }
+
+    if (act === 'check-order') {
+      const s = shareState;
+      s.orderChecked = true;
+      s.score = s.orderList.filter((item, pos) => item.idx === pos).length;
+      if (s.score === s.activity.items.length) burstConfetti();
+      renderPlay();
+      return;
+    }
+
+    if (act === 'finish-order') {
+      shareState.done = true;
+      updateStudentProgress();
+      renderPlay();
+      return;
+    }
+  });
+
+  window.addEventListener('hashchange', route);
+  route();
+})();
+</script>
+
+</body>
+</html>
